@@ -1,0 +1,60 @@
+spring:
+  application:
+    name: gateway-service
+
+server:
+  port: 8080
+ 
+eureka:
+  client:
+    region: default
+    registryFetchIntervalSeconds: 5
+ 
+zuul:
+  routes:
+    product-service:
+      path: /product-service/**
+      sensitive-headers: Set-Cookie,Authorization
+
+    order-service:
+      path: /rating-service/**
+      sensitive-headers: Set-Cookie,Authorization
+
+    discovery:
+      path: /discovery/**
+      sensitive-headers: Set-Cookie,Authorization
+      url: http://localhost:8082
+
+hystrix:
+  command:
+    product-service:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 600000
+ 
+    order-service:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 600000
+
+    discovery:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 600000
+
+# logging settings
+logging:
+  level:
+    root: info
+    com:
+      netflix: error
+    org:
+      apache: warn
+      springframework: warn
+
+  pattern:
+    # special characters need to be escaped / quoted
+    console: '%clr([%date{HH:mm:ss.SSS}]){faint} %clr(%thread) %clr(%2p) %clr(%-40.40logger{36}){cyan} %m%n%wex'

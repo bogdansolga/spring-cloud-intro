@@ -1,0 +1,33 @@
+spring:
+  application:
+    name: discovery-server
+
+server:
+  port: 8082
+
+eureka:
+  instance:
+    hostname: localhost
+
+  client:
+    serviceUrl:
+      # operating in the default zone - matches the config client’s region setting
+      defaultZone: http://localhost:8082/eureka/
+
+    # do not register with another discovery instance
+    register-with-eureka: false
+    fetch-registry: false
+
+# logging settings
+logging:
+  level:
+    root: info
+    com:
+      netflix: error
+    org:
+      apache: warn
+      springframework: warn
+
+  pattern:
+    # special characters need to be escaped / quoted
+    console: '%clr([%date{HH:mm:ss.SSS}]){faint} %clr(%thread) %clr(%2p) %clr(%-40.40logger{36}){cyan} %m%n%wex'

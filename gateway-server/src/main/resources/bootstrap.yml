@@ -1,0 +1,14 @@
+spring:
+  cloud:
+    config:
+      name: gateway-service
+      uri: http://localhost:8081
+
+    discovery:
+      service-id: config
+      enabled: true
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8082/eureka/

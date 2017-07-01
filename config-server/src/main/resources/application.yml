@@ -1,0 +1,42 @@
+# Reference - http://cloud.spring.io/spring-cloud-static/spring-cloud.html#_spring_cloud_config
+server:
+  port: 8081
+
+spring:
+  application:
+    name: config-server
+  cloud:
+    config:
+      server:
+        # used just for demoing purposes
+        native:
+          search-locations: file://${user.dir}/centralized-config/
+          fail-on-error: true
+
+        # recommended backend
+        # git:
+
+  # indent the returned JSON responses
+  jackson:
+      serialization:
+        INDENT_OUTPUT: true
+
+# Eureka settings
+eureka:
+  client:
+    region: default
+    registryFetchIntervalSeconds: 5
+    serviceUrl:
+      defaultZone: http://localhost:8082/eureka/
+
+# logging settings
+logging:
+  level:
+    root: info
+    com.netflix: error
+    org.apache: warn
+    org.springframework: warn
+
+  pattern:
+    # special characters need to be escaped / quoted
+    console: '%clr([%date{HH:mm:ss.SSS}]){faint} %clr(%thread) %clr(%2p) %clr(%-40.40logger{36}){cyan} %m%n%wex'
