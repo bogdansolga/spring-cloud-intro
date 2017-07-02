@@ -8,7 +8,7 @@ server:
 eureka:
   client:
     region: default
-    registryFetchIntervalSeconds: 5
+    registry-fetch-interval-seconds: 5
  
 zuul:
   # allows defining an application to route certain requests, based on an ant URL matcher
