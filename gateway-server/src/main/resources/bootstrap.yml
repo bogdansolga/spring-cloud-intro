@@ -1,3 +1,4 @@
+# Spring Cloud-based services look for a file called src/main/resources/bootstrap.(properties,yml) that it expects to find to bootstrap the service
 spring:
   cloud:
     config:
@@ -8,6 +9,7 @@ spring:
       service-id: config
       enabled: true
 
+# Eureka config (reference - http://cloud.spring.io/spring-cloud-static/Dalston.SR1/#_appendix_compendium_of_configuration_properties)
 eureka:
   client:
     serviceUrl:
