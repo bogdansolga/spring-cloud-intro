@@ -1,8 +1,9 @@
 # spring-cloud-intro
 An intro into the Spring Cloud ecosystem
 
-The project contains five projects:
-* `centralized-config` - a [Spring Cloud Config Server](https://cloud.spring.io/spring-cloud-config/spring-cloud-config.html) application
+The project contains six projects:
+* `centralized-config` - a repository which keeps the configurations for the other projects and services 
+* `config-server` - a [Spring Cloud Config Server](https://cloud.spring.io/spring-cloud-config/spring-cloud-config.html) application
 * `discovery-server` - a [Spring Cloud Eureka Server](https://cloud.spring.io/spring-cloud-netflix/) application
 * `gateway-server` - a [Spring Cloud Zuul Server](https://cloud.spring.io/spring-cloud-netflix/) application
 * `product-service` - a products REST application
