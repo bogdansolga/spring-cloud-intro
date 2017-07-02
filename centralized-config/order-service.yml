@@ -1,0 +1,44 @@
+spring:
+  application:
+    name: product-service
+
+  # indent the returned JSON responses
+  jackson:
+    serialization:
+      INDENT_OUTPUT: true
+
+  datasource:
+    platform: h2
+    url: jdbc:h2:mem:orders
+    username: sa
+    password: aVeryComplexPassword
+    initialize: false
+
+  jpa:
+    properties:
+      hibernate:
+        show_sql: false
+        format_sql: true
+
+server:
+  port: 8084
+
+eureka:
+  client:
+    region: default
+    registry-fetch-interval-seconds: 5
+
+# logging settings
+logging:
+  level:
+    root: info
+    com:
+      netflix: error
+    org:
+      apache: warn
+      hibernate: warn
+      springframework: warn
+
+  pattern:
+    # special characters need to be escaped / quoted
+    console: '%clr([%date{HH:mm:ss.SSS}]){faint} %clr(%thread) %clr(%2p) %clr(%-40.40logger{36}){cyan} %m%n%wex'

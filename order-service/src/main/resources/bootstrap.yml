@@ -1,0 +1,16 @@
+# Spring Cloud-based services look for a file called src/main/resources/bootstrap.(properties,yml) that it expects to find to bootstrap the service
+spring:
+  cloud:
+    config:
+      name: order-service
+      uri: http://localhost:8081
+
+    discovery:
+      service-id: config
+      enabled: true
+
+# Eureka config
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8082/eureka/
