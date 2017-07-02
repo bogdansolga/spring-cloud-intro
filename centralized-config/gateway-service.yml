@@ -11,7 +11,10 @@ eureka:
     registryFetchIntervalSeconds: 5
  
 zuul:
+  # allows defining an application to route certain requests, based on an ant URL matcher
   routes:
+    # route any request that comes in on ‘/product-service/**’ to an application with the spring.application.name of ‘product-service’
+    # Zuul will lookup the service from discovery server (using the application name) and will forward the request to that service
     product-service:
       path: /product-service/**
       sensitive-headers: Set-Cookie,Authorization
