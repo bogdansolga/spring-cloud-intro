@@ -20,7 +20,7 @@ zuul:
       sensitive-headers: Set-Cookie,Authorization
 
     order-service:
-      path: /rating-service/**
+      path: /order-service/**
       sensitive-headers: Set-Cookie,Authorization
 
     discovery:
