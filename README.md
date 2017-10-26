@@ -18,4 +18,9 @@ In order to easily run all the projects from a single run config:
    * GatewayApplication
    * ProductServiceApplication
    * OrderServiceApplication
-3. Set a delay of 5 seconds between their launch, to make sure that the depending services have been started 
+3. Set a delay of 5 seconds between their launch, to make sure that the depending services have been started
+
+# Accessing the Eureka dashboard and the services endpoints
+* [eureka-dashboard](http://localhost:8082)
+* [order-service](http://localhost:8080/order-service/order)
+* [product-service](http://localhost:8080/product-service/product)
