@@ -30,8 +30,7 @@ public class OrderService {
     }
 
     public OrderDTO get(final int id) {
-        final Order order = Optional.ofNullable(orderRepository.findOne(id))
-                                    .orElseThrow(() -> new IllegalArgumentException("There is no order with the id " + id));
+        final Order order = getOrder(id);
 
         return getOrderConverter().apply(order);
     }
@@ -43,19 +42,25 @@ public class OrderService {
     }
 
     public void update(final int id, final OrderDTO orderDTO) {
-        final Order existingOrder = orderRepository.findOne(id);
-
-        existingOrder.setProducts(orderDTO.getProducts()
-                                          .stream()
-                                          .map(productDTO -> new Product(productDTO.getId(), productDTO.getProductName(),
-                                                  productDTO.getPrice(), existingOrder))
-                                          .collect(Collectors.toSet()));
-
+        final Order existingOrder = getOrder(id);
+        existingOrder.setProducts(getNewProducts(orderDTO, existingOrder));
         orderRepository.save(existingOrder);
     }
 
     public void delete(final int id) {
         orderRepository.delete(id);
+    }
+
+    private Order getOrder(final int id) {
+        return Optional.ofNullable(orderRepository.findOne(id))
+                       .orElseThrow(() -> new IllegalArgumentException("There is no order with the id " + id));
+    }
+
+    private Set<Product> getNewProducts(final OrderDTO orderDTO, final Order existingOrder) {
+        return orderDTO.getProducts()
+                       .stream()
+                       .map(productDTO -> getProductDTOConverter(existingOrder).apply(productDTO))
+                       .collect(Collectors.toSet());
     }
 
     private Function<OrderDTO, Order> getDTOConverter() {
@@ -74,5 +79,10 @@ public class OrderService {
                                 .sum()
                     );
         };
+    }
+
+    private Function<ProductDTO, Product> getProductDTOConverter(final Order existingOrder) {
+        return productDTO -> new Product(productDTO.getId(), productDTO.getProductName(),
+                productDTO.getPrice(), existingOrder);
     }
 }
